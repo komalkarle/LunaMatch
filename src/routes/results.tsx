@@ -143,7 +143,7 @@ function ResultsPage() {
             value={result.rmse.toFixed(2)}
             unit="px"
             icon={Gauge}
-            hint="Sub-pixel residual across inliers"
+            hint="Registration residual across inliers"
           />
           <MetricCard
             label="Spatial Coverage"
@@ -299,7 +299,7 @@ function Frame({
   meta,
   warped,
 }: {
-  url?: string;
+  url?: string | undefined;
   caption: string;
   meta: string;
   warped?: boolean;
@@ -335,7 +335,8 @@ function DistributionGrid({ matches }: { matches: { sx: number; sy: number; inli
     .forEach((m) => {
       const cx = Math.min(cols - 1, Math.floor(m.sx * cols));
       const cy = Math.min(rows - 1, Math.floor(m.sy * rows));
-      cells[cy * cols + cx] += 1;
+      const cellIndex = cy * cols + cx;
+      cells[cellIndex] = (cells[cellIndex] ?? 0) + 1;
     });
   const max = Math.max(1, ...cells);
   const occupied = cells.filter((c) => c > 0).length;

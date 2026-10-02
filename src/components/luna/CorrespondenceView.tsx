@@ -11,8 +11,8 @@ export function CorrespondenceView({
   matches,
   showOutliers,
 }: {
-  sourceUrl?: string;
-  referenceUrl?: string;
+  sourceUrl?: string | undefined;
+  referenceUrl?: string | undefined;
   matches: MatchPoint[];
   showOutliers: boolean;
 }) {
